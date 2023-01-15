@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Code:regular,bold,italic&subset=latin,latin-ext");
+
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+.inlineCodeFormat {
+  font-family: "Fira Code", monospace;
+  color: #fff;
+  background-color: #000;
+  padding: 0.2em;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.centered {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.ui.grid > .row {
+  padding: 0.7em 3em;
+}
+
+code {
+  font-family: "Jetbrains Mono", monospace;
+  font-size: 0.9em;
+  color: white;
+  background-color: #555;
+  padding: 2px 10px;
+  border-radius: 2px;
+  margin: 0 10px;
+}
