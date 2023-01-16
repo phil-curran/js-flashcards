@@ -131,16 +131,9 @@ const Flashcard = ({
                 Quizlet
               </a>{" "}
             </p>
-            <div className="buttons">
-              <Link to={`/${id}`}>
-                <i className="material-icons" onClick={handleDelete}>
-                  Edit
-                </i>
-              </Link>
-              <i className="material-icons" onClick={handleDelete}>
-                delete
-              </i>
-            </div>
+            <Link to={`/${id}`}>
+              <i className="material-icons">edit</i>
+            </Link>
           </Grid.Row>
         </Grid>
       )}

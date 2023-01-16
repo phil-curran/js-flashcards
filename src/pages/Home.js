@@ -85,7 +85,6 @@ const Home = () => {
         handleSkipButton={handleSkipButton}
         handleGotItButton={handleGotItButton}
       />
-      {/* <EditForm key={currentCard.number} currentCard={currentCard} /> */}
     </Container>
   );
 };
