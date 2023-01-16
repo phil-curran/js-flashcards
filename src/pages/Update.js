@@ -8,7 +8,7 @@ const Update = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [category, setCategory] = useState(1);
+  const [category, setCategory] = useState("");
   const [question, setQuestion] = useState("");
   const [answerText, setAnswerText] = useState("");
   const [answerCode, setAnswerCode] = useState("");
@@ -32,13 +32,18 @@ const Update = () => {
     const { data, error, status } = await supabase
       .from("flashcards")
       .update({
+        id,
         category,
+        question,
+        answerText,
+        answerCode,
+        mdnLink,
+        quizletLink,
       })
       .eq("id", id);
-    // .match("id", id);
-    console.log("data", data);
-    console.log("error", error);
-    console.log("status", status);
+    console.log("Data: ", data);
+    console.log("Error: ", error);
+    console.log("Status: ", status);
     if (error) {
       setFormError("Please fill in all the fields correctly.");
     } else {
@@ -88,28 +93,58 @@ const Update = () => {
   return (
     <Container>
       <Segment stacked padded className="answer">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="id">ID:</label>
-          <input type="text" id="id" name="id" defaultValue={id} />
-
-          <label htmlFor="category">Category:</label>
-          <input
-            type="text"
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+        <Form>
+          <Form.Group widths="equal">
+            <Form.Input fluid label="Number" defaultValue={id} />
+            <Form.Input
+              fluid
+              label="category"
+              defaultValue={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Field>
+            <Form.TextArea
+              label="Question:"
+              defaultValue={question}
+              onChange={(e) => setQuestion(e.target.value)}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Form.TextArea
+              label="Answer:"
+              defaultValue={answerText}
+              onChange={(e) => setAnswerText(e.target.value)}
+            />
+          </Form.Field>
+          <Form.TextArea
+            label="Code Block:"
+            defaultValue={answerCode}
+            onChange={(e) => setAnswerCode(e.target.value)}
           />
-
-          {/* <label for="fname">First name:</label><br>
-          <input type="text" id="id" name="id" defaultValue={id} /><br />
-
-          <label for="fname">First name:</label><br>
-          <input type="text" id="id" name="id" defaultValue={id} /><br />
-
-          <label for="fname">First name:</label><br />
-          <input type="text" id="id" name="id" defaultValue={id} /><br /> */}
-          <button type="submit">Submit</button>
-        </form>
+          <Form.Field>
+            <Form.Input
+              label="MDN Link:"
+              defaultValue={mdnLink}
+              onChange={(e) => setMdnLink(e.target.value)}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Form.Input
+              label="Quizlet Link:"
+              defaultValue={quizletLink}
+              onChange={(e) => setQuizletLink(e.target.value)}
+            />
+          </Form.Field>
+          <div>
+            <Button color="red" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button color="green" onClick={handleSubmit}>
+              Save
+            </Button>
+          </div>
+        </Form>
       </Segment>
     </Container>
   );
