@@ -25,6 +25,10 @@ const EditForm = ({ currentCard }) => {
   const [cardMdnLink, setMdnLink] = useState(mdnLink);
   const [cardQuizletLink, setQuizletLink] = useState(quizletLink);
 
+  // const handleDelete = () => {
+  //   console.log("handleDelete from Flashcard.js");
+  // };
+
   return (
     <Segment stacked padded className="answer">
       <Form>

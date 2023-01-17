@@ -47,10 +47,6 @@ const Flashcard = ({
     }
   };
 
-  const handleDelete = () => {
-    console.log("handleDelete from Flashcard.js");
-  };
-
   const renderHTML = (text) => {
     return React.createElement("p", {
       dangerouslySetInnerHTML: { __html: text },

@@ -18,11 +18,11 @@ const Home = () => {
   let [skipCount, setSkipCount] = useState(0);
   let [gotItCount, setGotItCount] = useState(0);
 
-  const numberOfCards = 4;
+  const numberOfCards = 800;
 
   useEffect(() => {
     const fetchCards = async () => {
-      const { data, error } = await supabase.from("flashcards").select();
+      const { data, error } = await supabase.from("flashcard_db").select();
       if (error) {
         setFetchError("Could not fetch data");
         setFlashcards(null);
@@ -41,7 +41,7 @@ const Home = () => {
   };
 
   const filterData = () => {
-    let temp = flashcards.filter((card) => card.id !== currentCard.id);
+    let temp = flashcards.filter((card) => card.number !== currentCard.number);
     setFlashcards(temp);
   };
 
@@ -68,7 +68,7 @@ const Home = () => {
     <Container className="App">
       <Grid textAlign="center" columns={5} divided>
         <Grid.Row>
-          <Grid.Column>Card Number: {currentCard.id}</Grid.Column>
+          <Grid.Column>Card Number: {currentCard.number}</Grid.Column>
           <Grid.Column>Cards Left: {flashcards.length}</Grid.Column>
           <Grid.Column>Skip Count: {skipCount}</Grid.Column>
           <Grid.Column>Got It Count: {gotItCount}</Grid.Column>
