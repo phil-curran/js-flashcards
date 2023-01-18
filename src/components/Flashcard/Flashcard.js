@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Grid, Segment } from "semantic-ui-react";
-// import "../styles/CodeBlock.css";
 import "./style.css";
 
 // Components
@@ -19,7 +18,7 @@ const Flashcard = ({
   handleGotItButton,
 }) => {
   const {
-    id,
+    number,
     category,
     question,
     answerText,
@@ -28,7 +27,7 @@ const Flashcard = ({
     quizletLink,
   } = currentCard;
   const [showAnswer, setShowAnswer] = useState(false);
-  const [code, setCode] = useState([]);
+  const [code, setCode] = useState();
   const [buttonMessage, setButtonMessage] = useState("Show Answer");
   const [buttonIcon, setButtonIcon] = useState("unhide");
   const [buttonColor, setButtonColor] = useState("grey");
@@ -38,12 +37,12 @@ const Flashcard = ({
       setShowAnswer(false);
       setButtonMessage("Show Answer");
       setButtonIcon("unhide");
-      setButtonColor("grey");
+      setButtonColor("blue");
     } else {
       setShowAnswer(true);
       setButtonMessage("Hide Answer");
       setButtonIcon("hide");
-      setButtonColor("black");
+      setButtonColor("grey");
     }
   };
 
@@ -58,7 +57,7 @@ const Flashcard = ({
   }, [answerCode]);
 
   return (
-    <Segment key={id} stacked padded className="answer">
+    <Segment key={number} stacked padded>
       <Grid>
         <Grid.Row>
           <h1 className="centered">{category}</h1>
@@ -116,20 +115,35 @@ const Flashcard = ({
           </Grid.Row>
           <Grid.Row>
             <CodeBlock className="align-left" code={code} />
+            {/* {code === [] ? <p>empty array</p> : <p>{code}</p>} */}
           </Grid.Row>
-          <Grid.Row>
-            <p>
-              <a href={mdnLink} target="_blank" rel="noreferrer noopener">
-                MDN
-              </a>{" "}
-              |{" "}
-              <a href={quizletLink} target="_blank" rel="noreferrer noopener">
-                Quizlet
-              </a>{" "}
-            </p>
-            <Link to={`/${id}`}>
-              <i className="material-icons">edit</i>
-            </Link>
+          <Grid.Row className="cardFooter">
+            <Grid.Column
+              className="links"
+              textAlign="left"
+              floated="left"
+              width={2}
+            >
+              <small>
+                <a href={mdnLink} target="_blank" rel="noreferrer noopener">
+                  MDN
+                </a>{" "}
+                |{" "}
+                <a href={quizletLink} target="_blank" rel="noreferrer noopener">
+                  Quizlet
+                </a>{" "}
+              </small>
+            </Grid.Column>
+            <Grid.Column
+              className="buttons"
+              textAlign="right"
+              floated="right"
+              width={2}
+            >
+              <Link to={`/${number}`}>
+                <Button size="mini" icon="edit" color="yellow" />
+              </Link>
+            </Grid.Column>
           </Grid.Row>
         </Grid>
       )}

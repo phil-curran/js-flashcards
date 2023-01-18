@@ -21,7 +21,7 @@
 }
 
 .ui.grid > .row {
-  padding: 0.7em 3em;
+  padding: 1em 2em;
 }
 
 code {
@@ -32,4 +32,17 @@ code {
   padding: 2px 10px;
   border-radius: 2px;
   margin: 0 10px;
+}
+
+/* .cardFooter {
+  display: flex;
+  align-items: flex-end;
+} */
+
+.links {
+  padding-left: 0px !important;
+}
+
+.buttons {
+  padding-right: 0px !important;
 }

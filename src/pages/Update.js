@@ -2,20 +2,34 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import supabase from "../config/client";
-import { Container, Segment, Form, Button } from "semantic-ui-react";
+import {
+  Container,
+  Segment,
+  Form,
+  TextArea,
+  Button,
+  Grid,
+} from "semantic-ui-react";
+// Styles
+import "semantic-ui-css/semantic.css";
+import "../App.css";
 
 const Update = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const update = new Date();
+
   const [category, setCategory] = useState("");
   const [question, setQuestion] = useState("");
   const [answerText, setAnswerText] = useState("");
-  const [answerCode, setAnswerCode] = useState("");
+  const [answerCode, setAnswerCode] = useState([]);
   const [mdnLink, setMdnLink] = useState("");
   const [quizletLink, setQuizletLink] = useState("");
+  const [lastUpdated, setLastUpdated] = useState(null);
   const [formError, setFormError] = useState(null);
 
+  // SET
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
@@ -30,21 +44,19 @@ const Update = () => {
       return;
     }
     const { data, error, status } = await supabase
-      .from("flashcards")
+      .from("flashcard_db")
       .update({
-        id,
         category,
         question,
         answerText,
         answerCode,
         mdnLink,
         quizletLink,
+        lastUpdated: update,
       })
-      .eq("id", id);
-    console.log("Data: ", data);
-    console.log("Error: ", error);
-    console.log("Status: ", status);
+      .eq("number", id);
     if (error) {
+      console.log(error);
       setFormError("Please fill in all the fields correctly.");
     } else {
       setFormError(null);
@@ -52,12 +64,13 @@ const Update = () => {
     }
   };
 
+  // GET
   useEffect(() => {
     const fetchCards = async () => {
       const { data, error } = await supabase
-        .from("flashcards")
+        .from("flashcard_db")
         .select()
-        .eq("id", id)
+        .eq("number", id)
         .single();
       if (error) {
         navigate("/", { replace: true });
@@ -68,6 +81,7 @@ const Update = () => {
         setAnswerCode(data.answerCode);
         setMdnLink(data.mdnLink);
         setQuizletLink(data.quizletLink);
+        setLastUpdated(data.lastUpdated);
       }
     };
     fetchCards();
@@ -80,25 +94,25 @@ const Update = () => {
     setAnswerCode(null);
     setMdnLink(null);
     setQuizletLink(null);
+    setLastUpdated(null);
     navigate("/");
   };
 
-  console.log("category", category);
-  // console.log("question", question);
-  // console.log("answerText", answerText);
-  // console.log("answerCode", answerCode);
-  // console.log("mdnLink", mdnLink);
-  // console.log("quizletLink", quizletLink);
-
   return (
-    <Container>
+    <Container className="App">
+      <Grid textAlign="center" columns={2} divided>
+        <Grid.Row>
+          <Grid.Column>Card Number: {id}</Grid.Column>
+          <Grid.Column>Last Updated: {lastUpdated}</Grid.Column>
+        </Grid.Row>
+      </Grid>
       <Segment stacked padded className="answer">
         <Form>
           <Form.Group widths="equal">
-            <Form.Input fluid label="Number" defaultValue={id} />
+            <Form.Input fluid label="Number:" defaultValue={id} />
             <Form.Input
               fluid
-              label="category"
+              label="Category:"
               defaultValue={category}
               onChange={(e) => setCategory(e.target.value)}
             />
@@ -117,11 +131,13 @@ const Update = () => {
               onChange={(e) => setAnswerText(e.target.value)}
             />
           </Form.Field>
-          <Form.TextArea
-            label="Code Block:"
-            defaultValue={answerCode}
-            onChange={(e) => setAnswerCode(e.target.value)}
-          />
+          <Form.Field>
+            <Form.TextArea
+              label="Code Block:"
+              defaultValue={answerCode}
+              onChange={(e) => setAnswerCode(e.target.value)}
+            />
+          </Form.Field>
           <Form.Field>
             <Form.Input
               label="MDN Link:"
@@ -136,14 +152,14 @@ const Update = () => {
               onChange={(e) => setQuizletLink(e.target.value)}
             />
           </Form.Field>
-          <div>
+          <Grid.Row className="centered">
             <Button color="red" onClick={handleCancel}>
               Cancel
             </Button>
             <Button color="green" onClick={handleSubmit}>
               Save
             </Button>
-          </div>
+          </Grid.Row>
         </Form>
       </Segment>
     </Container>

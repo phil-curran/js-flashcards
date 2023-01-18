@@ -50,7 +50,6 @@ const Home = () => {
     if (gotItCount < numberOfCards) {
       setSkipCount((skipCount += 1));
       setCurrentCard(flashcards[getRandomNumber()]);
-    } else {
     }
   };
 
