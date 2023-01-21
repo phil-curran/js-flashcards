@@ -115,7 +115,6 @@ const Flashcard = ({
           </Grid.Row>
           <Grid.Row>
             <CodeBlock className="align-left" code={code} />
-            {/* {code === [] ? <p>empty array</p> : <p>{code}</p>} */}
           </Grid.Row>
           <Grid.Row className="cardFooter">
             <Grid.Column

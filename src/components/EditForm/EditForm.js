@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Segment, Form } from "semantic-ui-react";
 import "../styles/CodeBlock.css";
 import "../styles/Flashcard.css";
-
 // Semantic UI Components
 import { Button } from "semantic-ui-react";
 
@@ -16,6 +15,9 @@ const EditForm = ({ currentCard }) => {
     answerCode,
     mdnLink,
     quizletLink,
+    timesSkipped,
+    timesEdited,
+    lastUpdated,
   } = currentCard;
   const [cardNumber, setNumber] = useState(id);
   const [cardCategory, setCategory] = useState(category);
@@ -24,6 +26,9 @@ const EditForm = ({ currentCard }) => {
   const [cardAnswerCode, setAnswerCode] = useState(answerCode);
   const [cardMdnLink, setMdnLink] = useState(mdnLink);
   const [cardQuizletLink, setQuizletLink] = useState(quizletLink);
+  const [cardTimesSkipped, setTimesSkipped] = useState(timesSkipped);
+  const [cardTimesEdited, setTimesEdited] = useState(timesEdited);
+  const [cardLastUpdated, setLastUpdated] = useState(lastUpdated);
 
   // const handleDelete = () => {
   //   console.log("handleDelete from Flashcard.js");

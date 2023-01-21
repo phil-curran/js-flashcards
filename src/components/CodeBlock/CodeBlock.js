@@ -3,7 +3,6 @@ import { Icon } from "semantic-ui-react";
 import hljs from "highlight.js";
 import javascript from "highlight.js/lib/languages/javascript";
 import "../../../node_modules/highlight.js/styles/atom-one-dark.css";
-
 import "./style.css";
 
 const CodeBlock = ({ code }) => {
@@ -12,12 +11,8 @@ const CodeBlock = ({ code }) => {
 
   let codeArray = code.split(" | ");
 
-  // TODO:
-  // - fix code block to minimize breaks between lines
-  // - fix code block to use hljs correctly
-
-  return (
-    <div className="codeBlock">
+  const CopyButton = () => {
+    return (
       <div
         className="copyIcon"
         onClick={() => {
@@ -26,6 +21,12 @@ const CodeBlock = ({ code }) => {
       >
         <Icon name="copy outline" size="large" />
       </div>
+    );
+  };
+
+  return (
+    <div className="codeBlock">
+      {code !== [] && <CopyButton />}
       <div>
         {codeArray.map((line, index) => {
           return (

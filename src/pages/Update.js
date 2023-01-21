@@ -26,6 +26,8 @@ const Update = () => {
   const [answerCode, setAnswerCode] = useState([]);
   const [mdnLink, setMdnLink] = useState("");
   const [quizletLink, setQuizletLink] = useState("");
+  const [timesSkipped, setTimesSkipped] = useState(null);
+  const [timesEdited, setTimesEdited] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [formError, setFormError] = useState(null);
 
@@ -52,6 +54,8 @@ const Update = () => {
         answerCode,
         mdnLink,
         quizletLink,
+        timesSkipped,
+        timesEdited,
         lastUpdated: update,
       })
       .eq("number", id);
@@ -81,6 +85,8 @@ const Update = () => {
         setAnswerCode(data.answerCode);
         setMdnLink(data.mdnLink);
         setQuizletLink(data.quizletLink);
+        setTimesSkipped((data.timesSkipped += 1));
+        setTimesEdited((data.timesEdited += 1));
         setLastUpdated(data.lastUpdated);
       }
     };
@@ -94,15 +100,19 @@ const Update = () => {
     setAnswerCode(null);
     setMdnLink(null);
     setQuizletLink(null);
+    setTimesSkipped(null);
+    setTimesEdited(null);
     setLastUpdated(null);
     navigate("/");
   };
 
   return (
     <Container className="App">
-      <Grid textAlign="center" columns={2} divided>
+      <Grid textAlign="center" columns={4} divided>
         <Grid.Row>
           <Grid.Column>Card Number: {id}</Grid.Column>
+          <Grid.Column>Times Skipped: {timesSkipped}</Grid.Column>
+          <Grid.Column>Times Edited: {timesEdited}</Grid.Column>
           <Grid.Column>Last Updated: {lastUpdated}</Grid.Column>
         </Grid.Row>
       </Grid>
