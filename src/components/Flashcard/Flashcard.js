@@ -46,6 +46,7 @@ const Flashcard = ({
     }
   };
 
+  /* can this be swapped for just regular createElement without dangerouslySetInnerHTML? */
   const renderHTML = (text) => {
     return React.createElement("p", {
       dangerouslySetInnerHTML: { __html: text },
@@ -116,6 +117,19 @@ const Flashcard = ({
           <Grid.Row>
             <CodeBlock className="align-left" code={code} />
           </Grid.Row>
+          {/* 
+          // use this when you want to add code to the flashcards
+          // code field: "[]" is the default value, once edited, change to ""
+          {code !== "[]" && (
+            <div>
+              <Grid.Row>
+                <h2>Code:</h2>
+              </Grid.Row>
+              <Grid.Row>
+                <CodeBlock className="align-left" code={code} />
+              </Grid.Row>
+            </div>
+          )} */}
           <Grid.Row className="cardFooter">
             <Grid.Column
               className="links"

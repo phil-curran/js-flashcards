@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React from "react";
 import { Icon } from "semantic-ui-react";
 import hljs from "highlight.js";
@@ -31,6 +32,7 @@ const CodeBlock = ({ code }) => {
         {codeArray.map((line, index) => {
           return (
             <pre key={index}>
+              {/* maybe include conditional rendering if line is empty, to avoid empty highlighted row. */}
               <code className="language-javascript">{line}</code>
             </pre>
           );
