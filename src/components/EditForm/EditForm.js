@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { Segment, Form } from "semantic-ui-react";
 import "../styles/CodeBlock.css";
-import "../styles/Flashcard.css";
+// import "../styles/Flashcard.css";
+import "./style.css";
 // Semantic UI Components
 import { Button } from "semantic-ui-react";
 
@@ -53,6 +54,7 @@ const EditForm = ({ currentCard }) => {
         </Form.Group>
         <Form.Field>
           <Form.TextArea
+            className="textArea"
             label="Question:"
             defaultValue={cardQuestion}
             onChange={(e) => setQuestion(e.target.value)}
@@ -60,12 +62,14 @@ const EditForm = ({ currentCard }) => {
         </Form.Field>
         <Form.Field>
           <Form.TextArea
+            className="textArea"
             label="Answer:"
             defaultValue={cardAnswerText}
             onChange={(e) => setAnswerText(e.target.value)}
           />
         </Form.Field>
         <Form.TextArea
+          className="textArea"
           label="Code Block:"
           defaultValue={cardAnswerCode}
           onChange={(e) => setAnswerCode(e.target.value)}

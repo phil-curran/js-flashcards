@@ -37,7 +37,7 @@ const Flashcard = ({
       setShowAnswer(false);
       setButtonMessage("Show Answer");
       setButtonIcon("unhide");
-      setButtonColor("blue");
+      setButtonColor("black");
     } else {
       setShowAnswer(true);
       setButtonMessage("Hide Answer");
@@ -97,7 +97,7 @@ const Flashcard = ({
 
         <Grid.Row>{renderHTML(question)}</Grid.Row>
 
-        <Grid.Row>
+        <Grid.Row className="centered">
           <Button color={buttonColor} onClick={() => handleShowAnswer()}>
             <Icon name={buttonIcon} />
             {buttonMessage}

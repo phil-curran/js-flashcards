@@ -4,5 +4,15 @@ p {
 
 .App {
   margin-top: 125px;
-  padding-top: 125px;
+  /* padding-top: 125px; */
+}
+
+.buttonOrder {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.random,
+.ordered {
+  width: 100px;
 }

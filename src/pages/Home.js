@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Grid } from "semantic-ui-react";
+import { Container, Grid, Button, Popup } from "semantic-ui-react";
 
 // Styles
 import "semantic-ui-css/semantic.css";
@@ -17,6 +17,7 @@ const Home = () => {
   const [currentCard, setCurrentCard] = useState({});
   let [skipCount, setSkipCount] = useState(0);
   let [gotItCount, setGotItCount] = useState(0);
+  let [order, setOrder] = useState("random");
 
   const numberOfCards = 800;
 
@@ -63,6 +64,14 @@ const Home = () => {
     }
   };
 
+  const handleButtonToggle = () => {
+    if (order === "random") {
+      setOrder("sequential");
+    } else {
+      setOrder("random");
+    }
+  };
+
   return (
     <Container className="App">
       <Grid textAlign="center" columns={5} divided>
@@ -84,6 +93,39 @@ const Home = () => {
         handleSkipButton={handleSkipButton}
         handleGotItButton={handleGotItButton}
       />
+      <Grid textAlign="center" columns={1}>
+        <Grid.Row>
+          <Grid.Column>
+            <Button.Group className="buttonOrder">
+              <Popup
+                position="left center"
+                content="Random Order"
+                trigger={
+                  <Button
+                    className="random"
+                    color="green"
+                    content="? &rArr; ?"
+                    onClick={() => setOrder("random")}
+                  />
+                }
+              />
+              <Button.Or />
+              <Popup
+                content="Sequential Order"
+                position="right center"
+                trigger={
+                  <Button
+                    className="random"
+                    color="grey"
+                    content="1 &rArr; 2"
+                    onClick={() => setOrder("random")}
+                  />
+                }
+              />
+            </Button.Group>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     </Container>
   );
 };

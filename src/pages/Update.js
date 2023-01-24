@@ -71,12 +71,14 @@ const Update = () => {
   // GET
   useEffect(() => {
     const fetchCards = async () => {
-      const { data, error } = await supabase
+      const { data, error, status } = await supabase
         .from("flashcard_db")
         .select()
         .eq("number", id)
         .single();
       if (error) {
+        console.log("Error: ", error.message);
+        console.log("Status: ", status);
         navigate("/", { replace: true });
       } else {
         setCategory(data.category);
