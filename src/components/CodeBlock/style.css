@@ -1,41 +1,117 @@
-.codeBlock {
-  display: block;
-  background-color: #333;
+.codeFormat {
   width: 100%;
-  line-height: 0.1em;
-
-  /* display: block;
-  background-color: #333;
-  font-size: 1.1em;
-  margin: 0.2rem 0.2rem; */
-
-  /*
-  color: #fff;
-  white-space: nowrap;
-  border: 1px solid #e1e1e1;
-  border-radius: 4px;
-  */
-}
-
-pre {
-  font-size: 1.1em;
 }
 
 .copyIcon {
   color: #95a5a6;
   background-color: rgba(0, 0, 0, 0);
+  margin-top: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 6px;
   border-radius: 4px;
   position: absolute;
-  top: 20px;
-  right: 35px;
+  top: 30px;
+  right: 50px;
   transition: font-color 0.1s, background-color 0.1s ease-in-out;
 }
 
 .copyIcon:hover {
   color: #ecf0f1;
   background-color: rgba(0, 0, 0, 0.7);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1.2em;
+  line-height: 1.8em;
+  font-family: "Jetbrains Mono";
+  font-size: 1.1em !important;
+}
+
+code.hljs {
+  padding: 4px;
+}
+
+.hljs {
+  color: #ecf0f1;
+  background: #2f3640;
+}
+
+.hljs-keyword,
+.hljs-literal,
+.hljs-selector-id,
+.hljs-selector-tag {
+  color: #2ecc71;
+}
+
+.hljs-number {
+  color: #f1c40f;
+}
+
+.hljs-attribute {
+  color: #3498db;
+}
+
+.hljs-link,
+.hljs-regexp {
+  color: #d39745;
+}
+
+.hljs-meta {
+  color: #487eb0;
+}
+
+.hljs-addition,
+.hljs-built_in,
+.hljs-bullet,
+.hljs-emphasis,
+.hljs-name,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-subst,
+.hljs-tag,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable {
+  color: #7ed6df;
+}
+
+.hljs-string,
+.hljs-symbol {
+  color: #e74c3c;
+}
+
+.hljs-comment,
+.hljs-deletion,
+.hljs-quote {
+  color: #7f8c8d;
+}
+
+.hljs-selector-class {
+  color: #9b59b6;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-literal,
+.hljs-name,
+.hljs-section,
+.hljs-selector-tag,
+.hljs-strong,
+.hljs-title,
+.hljs-type {
+  font-weight: 700;
+}
+
+.hljs-class .hljs-title,
+.hljs-code,
+.hljs-section,
+.hljs-title.class_ {
+  color: #ecf0f1;
 }

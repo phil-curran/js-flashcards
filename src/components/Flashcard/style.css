@@ -2,15 +2,6 @@
 
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
-.inlineCodeFormat {
-  font-family: "Fira Code", monospace;
-  color: #fff;
-  background-color: #000;
-  padding: 0.2em;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
 .centered {
   margin: 0 auto;
   text-align: center;
@@ -33,11 +24,6 @@ code {
   border-radius: 2px;
   margin: 0 10px;
 }
-
-/* .cardFooter {
-  display: flex;
-  align-items: flex-end;
-} */
 
 .links {
   padding-left: 0px !important;

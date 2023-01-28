@@ -1,15 +1,11 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import React from "react";
-import { Icon } from "semantic-ui-react";
+import React, { useEffect } from "react";
+import { Icon, Popup, Grid } from "semantic-ui-react";
 import hljs from "highlight.js";
 import javascript from "highlight.js/lib/languages/javascript";
-import "../../../node_modules/highlight.js/styles/atom-one-dark.css";
 import "./style.css";
 
 const CodeBlock = ({ code }) => {
-  hljs.registerLanguage("javascript", javascript);
-  hljs.highlightAll();
-
   let codeArray = code.split(" | ");
 
   const CopyButton = () => {
@@ -20,25 +16,42 @@ const CodeBlock = ({ code }) => {
           navigator.clipboard.writeText(codeArray[0]);
         }}
       >
-        <Icon name="copy outline" size="large" />
+        <Popup
+          position="right center"
+          offset={[0, 20]}
+          content="Copy Code"
+          trigger={<Icon name="copy outline" size="large" />}
+        />
       </div>
     );
   };
 
+  useEffect(() => {
+    hljs.configure({
+      languages: ["javascript"],
+      ignoreUnescapedHTML: true,
+    });
+    hljs.registerLanguage("javascript", javascript);
+    hljs.highlightAll();
+  }, []);
+
   return (
-    <div className="codeBlock">
-      {code !== [] && <CopyButton />}
-      <div>
-        {codeArray.map((line, index) => {
-          return (
-            <pre key={index}>
-              {/* maybe include conditional rendering if line is empty, to avoid empty highlighted row. */}
-              <code className="language-javascript">{line}</code>
-            </pre>
-          );
-        })}
-      </div>
-    </div>
+    <>
+      <Grid.Row>
+        <h2>Code:</h2>
+      </Grid.Row>
+
+      <Grid.Row>
+        <pre className="codeFormat">
+          <code className="javascript">
+            {codeArray.map((line, index) => {
+              return <span key={index}>{line}</span>;
+            })}
+          </code>
+        </pre>
+        <CopyButton />
+      </Grid.Row>
+    </>
   );
 };
 

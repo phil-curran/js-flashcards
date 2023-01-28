@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Grid, Segment } from "semantic-ui-react";
+import { Grid, Segment, Popup } from "semantic-ui-react";
 import "./style.css";
 
 // Components
@@ -111,25 +111,9 @@ const Flashcard = ({
             <h2>Answer:</h2>
           </Grid.Row>
           <Grid.Row>{renderHTML(answerText)}</Grid.Row>
-          <Grid.Row>
-            <h2>Code:</h2>
-          </Grid.Row>
-          <Grid.Row>
-            <CodeBlock className="align-left" code={code} />
-          </Grid.Row>
-          {/* 
-          // use this when you want to add code to the flashcards
-          // code field: "[]" is the default value, once edited, change to ""
-          {code !== "[]" && (
-            <div>
-              <Grid.Row>
-                <h2>Code:</h2>
-              </Grid.Row>
-              <Grid.Row>
-                <CodeBlock className="align-left" code={code} />
-              </Grid.Row>
-            </div>
-          )} */}
+
+          {code !== "[]" && <CodeBlock className="align-left" code={code} />}
+
           <Grid.Row className="cardFooter">
             <Grid.Column
               className="links"
@@ -153,9 +137,16 @@ const Flashcard = ({
               floated="right"
               width={2}
             >
-              <Link to={`/${number}`}>
-                <Button size="mini" icon="edit" color="yellow" />
-              </Link>
+              <Popup
+                position="right center"
+                content="Edit Card"
+                offset={[0, 10]}
+                trigger={
+                  <Link to={`/${number}`}>
+                    <Button size="mini" icon="edit" color="grey" />
+                  </Link>
+                }
+              />
             </Grid.Column>
           </Grid.Row>
         </Grid>

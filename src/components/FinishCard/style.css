@@ -1,0 +1,12 @@
+.finishSegment {
+  height: 300px;
+  text-align: center;
+}
+
+.test {
+  /* margin-top: 150px;
+  padding-top: 150px; */
+  position: relative;
+  top: 275%;
+  left: 0%;
+}

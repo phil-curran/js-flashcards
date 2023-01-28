@@ -10,37 +10,40 @@ import supabase from "../config/client";
 
 // Components
 import Flashcard from "../components/Flashcard/Flashcard";
+import FinishCard from "../components/FinishCard/FinishCard";
 
 const Home = () => {
-  const [fetchError, setFetchError] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [flashcards, setFlashcards] = useState([]);
   const [currentCard, setCurrentCard] = useState({});
   let [skipCount, setSkipCount] = useState(0);
   let [gotItCount, setGotItCount] = useState(0);
   let [order, setOrder] = useState("random");
+  let [cardNumber, setCardNumber] = useState(0);
 
-  const numberOfCards = 800;
+  const numberOfCards = 801;
 
   useEffect(() => {
     const fetchCards = async () => {
       const { data, error } = await supabase.from("flashcard_db").select();
       if (error) {
-        setFetchError("Could not fetch data");
+        setErrorMessage(error.message);
+        console.log("Error: ", error.message);
         setFlashcards(null);
       } else if (data) {
         setFlashcards(data);
         setCurrentCard(data[0]);
-        setFetchError(null);
       }
     };
     fetchCards();
-  }, [fetchError]);
+  }, [errorMessage]);
 
   // handle math
   const getRandomNumber = () => {
     return Math.floor(Math.random() * flashcards.length);
   };
 
+  // filter out current card
   const filterData = () => {
     let temp = flashcards.filter((card) => card.number !== currentCard.number);
     setFlashcards(temp);
@@ -50,25 +53,26 @@ const Home = () => {
   const handleSkipButton = () => {
     if (gotItCount < numberOfCards) {
       setSkipCount((skipCount += 1));
-      setCurrentCard(flashcards[getRandomNumber()]);
+      if (order === "random") {
+        setCurrentCard(flashcards[getRandomNumber()]);
+      } else if (order === "sequential") {
+        setCardNumber((cardNumber += 1));
+        setCurrentCard(flashcards[cardNumber]);
+      }
     }
+    console.log("Flashcards: ", flashcards.length);
   };
 
   const handleGotItButton = () => {
     if (flashcards.length > 0) {
       setGotItCount((gotItCount += 1));
       filterData();
-      setCurrentCard(flashcards[getRandomNumber()]);
-    } else {
-      console.log("No more cards left to SOLVE");
-    }
-  };
-
-  const handleButtonToggle = () => {
-    if (order === "random") {
-      setOrder("sequential");
-    } else {
-      setOrder("random");
+      if (order === "random") {
+        setCurrentCard(flashcards[getRandomNumber()]);
+      } else if (order === "sequential") {
+        setCardNumber((cardNumber += 1));
+        setCurrentCard(flashcards[cardNumber]);
+      }
     }
   };
 
@@ -81,30 +85,36 @@ const Home = () => {
           <Grid.Column>Skip Count: {skipCount}</Grid.Column>
           <Grid.Column>Got It Count: {gotItCount}</Grid.Column>
           <Grid.Column>
-            % Complete: {(gotItCount / numberOfCards) * 100}
+            Complete: {Math.floor((gotItCount / numberOfCards) * 100)} %
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <Flashcard
-        key={currentCard.number}
-        skipCount={skipCount}
-        gotItCount={gotItCount}
-        currentCard={currentCard}
-        handleSkipButton={handleSkipButton}
-        handleGotItButton={handleGotItButton}
-      />
+      {flashcards.length > 700 ? (
+        <Flashcard
+          key={currentCard.number}
+          skipCount={skipCount}
+          gotItCount={gotItCount}
+          currentCard={currentCard}
+          handleSkipButton={handleSkipButton}
+          handleGotItButton={handleGotItButton}
+        />
+      ) : (
+        <FinishCard />
+      )}
+
       <Grid textAlign="center" columns={1}>
         <Grid.Row>
           <Grid.Column>
             <Button.Group className="buttonOrder">
               <Popup
-                position="left center"
+                position="bottom right"
                 content="Random Order"
+                offset={[-10, 10]}
                 trigger={
                   <Button
                     className="random"
-                    color="green"
-                    content="? &rArr; ?"
+                    color={order === "random" ? "green" : "grey"}
+                    content="?"
                     onClick={() => setOrder("random")}
                   />
                 }
@@ -112,13 +122,13 @@ const Home = () => {
               <Button.Or />
               <Popup
                 content="Sequential Order"
-                position="right center"
+                position="bottom left"
+                offset={[10, 10]}
                 trigger={
                   <Button
-                    className="random"
-                    color="grey"
-                    content="1 &rArr; 2"
-                    onClick={() => setOrder("random")}
+                    color={order === "sequential" ? "green" : "grey"}
+                    content="&rArr;"
+                    onClick={() => setOrder("sequential")}
                   />
                 }
               />

@@ -1,10 +1,9 @@
-p {
-  font-size: 1.2em;
+.App {
+  margin-top: 25px;
 }
 
-.App {
-  margin-top: 125px;
-  /* padding-top: 125px; */
+p {
+  font-size: 1.2em;
 }
 
 .buttonOrder {
@@ -14,5 +13,9 @@ p {
 
 .random,
 .ordered {
-  width: 100px;
+  width: 60px;
+}
+
+.text-center {
+  text-align: center;
 }
