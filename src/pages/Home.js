@@ -18,7 +18,7 @@ const Home = () => {
   const [currentCard, setCurrentCard] = useState({});
   let [skipCount, setSkipCount] = useState(0);
   let [gotItCount, setGotItCount] = useState(0);
-  let [order, setOrder] = useState("random");
+  let [order, setOrder] = useState("sequential");
   let [cardNumber, setCardNumber] = useState(0);
 
   const numberOfCards = 801;
@@ -89,7 +89,7 @@ const Home = () => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      {flashcards.length > 700 ? (
+      {flashcards ? (
         <Flashcard
           key={currentCard.number}
           skipCount={skipCount}
