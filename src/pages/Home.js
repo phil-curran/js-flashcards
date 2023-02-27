@@ -20,17 +20,17 @@ const Home = () => {
   let [gotItCount, setGotItCount] = useState(0);
   let [order, setOrder] = useState("sequential");
   let [cardNumber, setCardNumber] = useState(0);
-
-  const numberOfCards = 801;
+  let [numberOfCards, setNumberOfCards] = useState(0);
 
   useEffect(() => {
     const fetchCards = async () => {
-      const { data, error } = await supabase.from("flashcard_db").select();
+      const { data, error } = await supabase.from("flashcards").select();
       if (error) {
         setErrorMessage(error.message);
         console.log("Error: ", error.message);
         setFlashcards(null);
       } else if (data) {
+        setNumberOfCards(data.length);
         setFlashcards(data);
         setCurrentCard(data[0]);
       }

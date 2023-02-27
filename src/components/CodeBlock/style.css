@@ -1,5 +1,6 @@
 .codeFormat {
   width: 100%;
+  margin: 0px 0px;
 }
 
 .copyIcon {
@@ -28,9 +29,9 @@ pre code.hljs {
   display: block;
   overflow-x: auto;
   padding: 1.2em;
-  line-height: 1.8em;
+  line-height: 1.4em;
   font-family: "Jetbrains Mono";
-  font-size: 1.1em !important;
+  font-size: 1.2em !important;
 }
 
 code.hljs {

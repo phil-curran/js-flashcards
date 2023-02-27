@@ -20,14 +20,16 @@ const Flashcard = ({
   const {
     number,
     category,
-    question,
+    questionText,
+    questionCode,
     answerText,
     answerCode,
     mdnLink,
     quizletLink,
   } = currentCard;
   const [showAnswer, setShowAnswer] = useState(false);
-  const [code, setCode] = useState();
+  const [Qcode, setQcode] = useState();
+  const [Acode, setAcode] = useState();
   const [buttonMessage, setButtonMessage] = useState("Show Answer");
   const [buttonIcon, setButtonIcon] = useState("unhide");
   const [buttonColor, setButtonColor] = useState("grey");
@@ -54,8 +56,9 @@ const Flashcard = ({
   };
 
   useEffect(() => {
-    setCode(answerCode, [answerCode]);
-  }, [answerCode]);
+    setQcode(questionCode);
+    setAcode(answerCode, [answerCode]);
+  }, [questionCode, answerCode]);
 
   return (
     <Segment key={number} stacked padded>
@@ -95,7 +98,13 @@ const Flashcard = ({
           <h2>Question:</h2>
         </Grid.Row>
 
-        <Grid.Row>{renderHTML(question)}</Grid.Row>
+        <Grid.Row>{renderHTML(questionText)}</Grid.Row>
+
+        {Qcode && (
+          <Grid.Row>
+            <CodeBlock className="align-left" code={Qcode} />
+          </Grid.Row>
+        )}
 
         <Grid.Row className="centered">
           <Button color={buttonColor} onClick={() => handleShowAnswer()}>
@@ -112,7 +121,7 @@ const Flashcard = ({
           </Grid.Row>
           <Grid.Row>{renderHTML(answerText)}</Grid.Row>
 
-          {code !== "[]" && <CodeBlock className="align-left" code={code} />}
+          {Acode && <CodeBlock className="align-left" code={Acode} />}
 
           <Grid.Row className="cardFooter">
             <Grid.Column
@@ -124,11 +133,7 @@ const Flashcard = ({
               <small>
                 <a href={mdnLink} target="_blank" rel="noreferrer noopener">
                   MDN
-                </a>{" "}
-                |{" "}
-                <a href={quizletLink} target="_blank" rel="noreferrer noopener">
-                  Quizlet
-                </a>{" "}
+                </a>
               </small>
             </Grid.Column>
             <Grid.Column
