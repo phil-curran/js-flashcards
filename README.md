@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Js Flashcards
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### By: Phil Curran
 
-## Available Scripts
+## Technologies Used
 
-In the project directory, you can run:
+- HTML5
+- CSS3
+- Semantic UI Component Library
+- Javascript
+- React, React Router, React Hooks
+- Supabase
+- Highlight.js
 
-### `npm start`
+## Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+I wanted to create a full CRUD app using a database I'd not used before. I chose Supabase because it's a Postgres database with a REST API. I also wanted to use React Hooks, so I created a flashcard app that allows users to create, read, update, and delete flashcards. Flashcard data comes from MDN Web Docs and will continue to expand.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+- Conditional show & hide of components
+- Full CRUD functionality
+- Responsive design
+- Styled code blocks using Highlight.js
+- Button to copy example code for each flashcard
+- Link to relevant MDN documentation for each flashcard
+- Ever-expanding set of questions and answers
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup/Installation Requirements
 
-### `npm run build`
+- Clone the repo: `git clone https://github.com/phil-curran/js-flashcards`
+- Install components: `cd js-flashcards && npm install`
+- Create a Supabase account and create a new database
+- Upload the 'flashcards_db.csv' file to a new table in your database instance
+- Create a `.env` file in the root directory and add your Supabase URL and API key
+- Start the app: `npm start`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Screenshots
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Main Card View
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![ Home View](/imgs/card.png "Home View")
 
-### `npm run eject`
+#### Card Detail View
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![ Card Detail View](/imgs/answer.png "Card Detail View")
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Known Bugs
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- _No Known Issues_
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Future Features
 
-## Learn More
+- Add search page for better inventory of questions
+- Add a filter function to main page to focus on specific topics
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contact
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Please contact me if you have issues, questions, or ideas:
 
-### Code Splitting
+- pecurran@outlook.com
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## License
 
-### Analyzing the Bundle Size
+MIT
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Copyright (c) 2023 Phil Curran
