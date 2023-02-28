@@ -25,7 +25,6 @@ const Flashcard = ({
     answerText,
     answerCode,
     mdnLink,
-    quizletLink,
   } = currentCard;
   const [showAnswer, setShowAnswer] = useState(false);
   const [Qcode, setQcode] = useState();
